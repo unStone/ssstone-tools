@@ -19,7 +19,8 @@
     },
     "windows": [
       {
-        "title": "ssstonetools",
+        "hiddenTitle": true,
+        "titleBarStyle": "Overlay",
         "width": 800,
         "height": 600
       }
