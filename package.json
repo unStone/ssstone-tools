@@ -12,6 +12,7 @@
   "dependencies": {
     "@ant-design/icons": "^5.3.6",
     "@tauri-apps/api": "^1",
+    "@tauri-apps/plugin-shell": "2.0.0-beta.2",
     "antd": "^5.16.0",
     "crypto-js": "^4.2.0",
     "react": "^18.2.0",
@@ -20,7 +21,7 @@
     "react-router-dom": "^6.22.3"
   },
   "devDependencies": {
-    "@tauri-apps/cli": "^1",
+    "@tauri-apps/cli": "2.0.0-beta.12",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react": "^4.2.1",
