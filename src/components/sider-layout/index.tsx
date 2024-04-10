@@ -37,8 +37,12 @@ const SiderLayout = () => {
     navigate([...keyPath].reverse().join('/'));
   };
 
-  const selectedKeys = useMemo(() => location.pathname.split('/').filter(Boolean), [location.pathname]);
+  const selectedKeys = useMemo(() => {
+    const keys = location.pathname.split('/').filter(Boolean);
+    return keys.length ? keys : ['home'];
+  }, [location.pathname]);
 
+  console.log('selectedKeys', selectedKeys);
   return (
     <Sider
       style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0, top: 0, bottom: 0, background: '#fff', paddingTop: 20 }}

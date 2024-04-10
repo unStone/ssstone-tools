@@ -2774,8 +2774,8 @@ dependencies = [
 ]
 
 [[package]]
-name = "ssstonetools"
-version = "0.0.0"
+name = "ssstone_tools"
+version = "0.0.1"
 dependencies = [
  "serde",
  "serde_json",
