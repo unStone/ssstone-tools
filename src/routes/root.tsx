@@ -5,6 +5,7 @@ import SiderLayout from 'components/sider-layout';
 
 const HomeComponent = React.lazy(() => import('pages/home'));
 const JSONComponent = React.lazy(() => import('pages/format/json'));
+const HashComponent = React.lazy(() => import('pages/generate/hash'));
 
 const Root: React.FC = () => {
 
@@ -21,6 +22,12 @@ const Root: React.FC = () => {
                 <Route
                   path="json"
                   element={<JSONComponent />}
+                />
+              </Route>
+              <Route path="generate" element={<HashComponent />}>
+                <Route
+                  path="hash"
+                  element={<HashComponent />}
                 />
               </Route>
             </Routes>

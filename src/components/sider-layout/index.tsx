@@ -27,6 +27,7 @@ function getItem(
 const items: MenuProps['items'] = [
     getItem('首页', 'home', <HomeOutlined />),
     getItem('格式类', 'format', null, [getItem('JSON转换', 'json')]),
+    getItem('转换类', 'generate', null, [getItem('hash', 'hash')]),
 ];
 
 const SiderLayout = () => {
