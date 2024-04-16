@@ -1,0 +1,10 @@
+.siderBox {
+  position: fixed!important;
+  background: #fff!important;
+  user-select: none;
+  overflow: auto;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  bottom: 0;
+}

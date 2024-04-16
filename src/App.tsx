@@ -3,7 +3,7 @@ import Root from "./routes/root";
 
 function App() {
   return (
-    <div className="container">
+    <div className="container" data-tauri-drag-region>
       <Root />
     </div>
   );

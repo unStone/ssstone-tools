@@ -21,7 +21,9 @@ export default defineConfig(async () => ({
   resolve: {
     alias: {
       'pages': '/src/pages/',
+      'store': '/src/store/',
       'components': '/src/components/',
+      'utils': '/src/utils/',
     }
   }
 }));

@@ -11,14 +11,17 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.3.6",
-    "@tauri-apps/api": "^1",
+    "@tauri-apps/api": "^2.0.0-beta.8",
+    "@tauri-apps/plugin-clipboard-manager": "^2.1.0-beta.0",
     "@tauri-apps/plugin-shell": "2.0.0-beta.2",
     "antd": "^5.16.0",
     "crypto-js": "^4.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-json-view": "^1.21.3",
-    "react-router-dom": "^6.22.3"
+    "react-router-dom": "^6.22.3",
+    "storejs": "^2.0.7",
+    "totp-generator": "^1.0.0"
   },
   "devDependencies": {
     "@tauri-apps/cli": "2.0.0-beta.12",

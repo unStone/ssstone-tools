@@ -4,6 +4,8 @@ import { Layout, Menu } from 'antd';
 import type { MenuProps } from 'antd';
 import { HomeOutlined } from '@ant-design/icons';
 import { useLocation, useNavigate } from 'react-router-dom';
+import Operators from './operators';
+import s from './index.module.css'
 
 const { Sider } = Layout;
 type MenuItem = Required<MenuProps>['items'][number];
@@ -27,7 +29,7 @@ function getItem(
 const items: MenuProps['items'] = [
     getItem('首页', 'home', <HomeOutlined />),
     getItem('格式类', 'format', null, [getItem('JSON转换', 'json')]),
-    getItem('转换类', 'generate', null, [getItem('hash', 'hash')]),
+    getItem('转换类', 'generate', null, [getItem('hash', 'hash'), getItem('GA', 'authenticator')]),
 ];
 
 const SiderLayout = () => {
@@ -42,11 +44,12 @@ const SiderLayout = () => {
     return keys.length ? keys : ['home'];
   }, [location.pathname]);
 
-  console.log('selectedKeys', selectedKeys);
   return (
     <Sider
-      style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0, top: 0, bottom: 0, background: '#fff', paddingTop: 20 }}
+      className={s.siderBox}
+      data-tauri-drag-region
     >
+      <Operators />
       <Menu
         onClick={onClick}
         defaultOpenKeys={items.map((item) => item?.key as string)}

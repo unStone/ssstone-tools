@@ -6,12 +6,13 @@ import SiderLayout from 'components/sider-layout';
 const HomeComponent = React.lazy(() => import('pages/home'));
 const JSONComponent = React.lazy(() => import('pages/format/json'));
 const HashComponent = React.lazy(() => import('pages/generate/hash'));
+const AuthenticatorComponent = React.lazy(() => import('pages/generate/authenticator'));
 
 const Root: React.FC = () => {
 
   return (
     <Router>
-      <Layout hasSider>
+      <Layout hasSider data-tauri-drag-region>
         <SiderLayout />
         <Layout style={{ marginLeft: 200, height: '100vh' }}>
           <React.Suspense fallback={null}>
@@ -24,10 +25,14 @@ const Root: React.FC = () => {
                   element={<JSONComponent />}
                 />
               </Route>
-              <Route path="generate" element={<HashComponent />}>
+              <Route path="generate">
                 <Route
                   path="hash"
                   element={<HashComponent />}
+                />
+                <Route
+                  path="authenticator"
+                  element={<AuthenticatorComponent />}
                 />
               </Route>
             </Routes>

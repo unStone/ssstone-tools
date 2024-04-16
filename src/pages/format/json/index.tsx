@@ -1,19 +1,24 @@
 import { Col, Row, Input } from "antd";
 import { useState } from "react";
 import ReactJson from "react-json-view";
+import Store from 'store/index';
 
 const { TextArea } = Input;
 
+const STORE_KEY = 'format/json';
+const jsonStore = new Store(STORE_KEY);
+
 function Json() {
-  const [jsonData, setJsonData] = useState<object>();
+  const [jsonData, setJsonData] = useState<object>(jsonStore.getData('jsonData') || {});
 
   const onChangeJsonInput = (e: any) => {
+    let value = e.target.value;
     try {
-      const json = JSON.parse(e.target.value);
-      setJsonData(json);
-    } catch (error) {
-      setJsonData(e.target.value);
-    }
+      value = JSON.parse(e.target.value);
+    } catch (error) {}
+
+    setJsonData(value);
+    jsonStore.setData({ jsonData: value })
   };
 
   return (
@@ -24,6 +29,7 @@ function Json() {
             style={{ height: "100vh", width: "100%" }}
             onChange={onChangeJsonInput}
             placeholder="请输入json数据..."
+            defaultValue={JSON.stringify(jsonData) || ''}
           />
         </Col>
         <Col span={12}>

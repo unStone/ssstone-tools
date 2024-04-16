@@ -26,8 +26,7 @@
     },
     "windows": [
       {
-        "hiddenTitle": true,
-        "titleBarStyle": "Overlay",
+        "decorations": false,
         "width": 800,
         "height": 600
       }

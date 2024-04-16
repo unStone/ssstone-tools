@@ -1,0 +1,45 @@
+.operators {
+  display: flex;
+  padding: 10px 4px;
+  user-select: none;
+
+  .iconBox {
+    width: 20px;
+    height: 20px;
+    font-size: 13px;
+    text-align: center;
+    overflow: hidden;
+    margin: 0;
+    background-position: 1px -40px;
+    cursor: default;
+  }
+  .icon {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+  
+  .close{
+    background-color: #ff6057;
+    margin: 0 auto;
+    &::before {
+      content: "";
+    }
+  }
+
+  .min{
+    background-color: #ffbd2e;
+    margin: 0 auto;
+    &::before {
+      content: "";
+    }
+  }
+
+  .max{
+    background-color: #28ca40;
+    margin: 0 auto;
+    &::before {
+      content: "";
+    }
+  }
+}
