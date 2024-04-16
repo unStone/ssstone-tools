@@ -46,6 +46,9 @@ devDependencies:
   '@tauri-apps/cli':
     specifier: 2.0.0-beta.12
     version: 2.0.0-beta.12
+  '@types/crypto-js':
+    specifier: ^4.2.2
+    version: 4.2.2
   '@types/react':
     specifier: ^18.2.15
     version: 18.2.74
@@ -985,6 +988,10 @@ packages:
     resolution: {integrity: sha512-WXCyOcRtH37HAUkpXhUduaxdm82b4GSlyTqajXviN4EfiuPgNYR109xMCKvpl6zPIpua0DGlMEDCq+g8EdoheQ==}
     dependencies:
       '@babel/types': 7.24.0
+    dev: true
+
+  /@types/crypto-js@4.2.2:
+    resolution: {integrity: sha512-sDOLlVbHhXpAUAL0YHDUUwDZf3iN4Bwi4W6a0W0b+QcAezUbRtH4FVb+9J4h+XFPW7l/gQ9F8qC7P+Ec4k8QVQ==}
     dev: true
 
   /@types/estree@1.0.5:

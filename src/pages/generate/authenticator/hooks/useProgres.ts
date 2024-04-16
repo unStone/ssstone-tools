@@ -17,7 +17,7 @@ const getDynamicCode = (data: Values) => {
       algorithm,
       period: cycle,
     }).otp
-  } catch (error) {
+  } catch (error: any) {
     otp = '错误：' + error?.message;
   }
   return otp;
