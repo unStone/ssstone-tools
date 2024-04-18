@@ -1,20 +1,19 @@
 import { writeText, readText } from '@tauri-apps/plugin-clipboard-manager';
 
-export async function readClipboard() {
+export const readClipboard: () => Promise<[string | null, Error | null, string]> = async () => {
   try {
-    await readText();
-    return [null, '读取剪切板成功']
+    const res = await readText();
+    return [res, null, '读取剪切板成功']
   } catch (error: any) {
-    return [error, error.message]
+    return [null, error, error.message]
   }
 }
 
-export async function writeClipboard(text: string) {
-  console.log('copy: writeClipboard', text)
+export const writeClipboard: (text: string) => Promise<[void | null, Error | null, string]> = async (text) => {
   try {
-    await writeText(text);
-    return [null, '复制成功']
+    const res = await writeText(text);
+    return [res, null, '复制成功']
   } catch (error: any) {
-    return [error, error.message]
+    return [null, error, error.message]
   }
 }

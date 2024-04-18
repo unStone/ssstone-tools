@@ -24,8 +24,7 @@ const { dynamicCode, percent } = useProgres(data);
 
 
   const onCopy = async () => {
-    console.log('copy: dynamicCode', dynamicCode);
-    const [error, msg] = await writeClipboard(dynamicCode);
+    const [_, error, msg] = await writeClipboard(dynamicCode);
     if (error) {
       message.error(msg);
     } else {
