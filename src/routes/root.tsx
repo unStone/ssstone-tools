@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SiderLayout from 'components/sider-layout';
 
 const HomeComponent = React.lazy(() => import('pages/home'));
+const NumberConponent = React.lazy(() => import('pages/convert/number'));
 const JSONComponent = React.lazy(() => import('pages/format/json'));
 const HashComponent = React.lazy(() => import('pages/generate/hash'));
 const AuthenticatorComponent = React.lazy(() => import('pages/generate/authenticator'));
@@ -19,6 +20,12 @@ const Root: React.FC = () => {
             <Routes>
               <Route path="/" element={<HomeComponent />}></Route>
               <Route path="home" element={<HomeComponent />}></Route>
+              <Route path="convert" element={<NumberConponent />}>
+                <Route
+                  path="number"
+                  element={<NumberConponent />}
+                />
+              </Route>
               <Route path="format" element={<JSONComponent />}>
                 <Route
                   path="json"
