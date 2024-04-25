@@ -7,6 +7,7 @@ const HomeComponent = React.lazy(() => import('pages/home'));
 const NumberConponent = React.lazy(() => import('pages/convert/number'));
 const JSONComponent = React.lazy(() => import('pages/format/json'));
 const HashComponent = React.lazy(() => import('pages/generate/hash'));
+const UrlComponent = React.lazy(() => import('pages/code/url'));
 const AuthenticatorComponent = React.lazy(() => import('pages/generate/authenticator'));
 
 const Root: React.FC = () => {
@@ -20,13 +21,19 @@ const Root: React.FC = () => {
             <Routes>
               <Route path="/" element={<HomeComponent />}></Route>
               <Route path="home" element={<HomeComponent />}></Route>
-              <Route path="convert" element={<NumberConponent />}>
+              <Route path="convert">
                 <Route
                   path="number"
                   element={<NumberConponent />}
                 />
               </Route>
-              <Route path="format" element={<JSONComponent />}>
+              <Route path="code">
+                <Route
+                  path="url"
+                  element={<UrlComponent />}
+                />
+              </Route>
+              <Route path="format">
                 <Route
                   path="json"
                   element={<JSONComponent />}
