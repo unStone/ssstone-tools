@@ -29,6 +29,7 @@ function getItem(
 const items: MenuProps['items'] = [
     getItem('首页', 'home', <HomeOutlined />),
     getItem('转换类', 'convert', null, [getItem('数字类型', 'number')]),
+    getItem('编码/转码类', 'code', null, [getItem('URL', 'url')]),
     getItem('格式类', 'format', null, [getItem('JSON转换', 'json')]),
     getItem('生成类', 'generate', null, [getItem('hash', 'hash'), getItem('GA', 'authenticator')]),
 ];
