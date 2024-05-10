@@ -9,7 +9,14 @@ fn greet(name: &str) -> String {
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
-    tauri::Builder::default()
+    let builder = tauri::Builder::default();
+
+    // 增加devtools插件
+    // 仅限debug模式下生效（https://devtools.crabnebula.dev/dash/127.0.0.1/3000）
+    #[cfg(debug_assertions)]
+    let builder = builder.plugin(tauri_plugin_devtools::init());
+
+    builder
         .plugin(tauri_plugin_shell::init())
         .plugin(tauri_plugin_clipboard_manager::init())
         .invoke_handler(tauri::generate_handler![greet])
