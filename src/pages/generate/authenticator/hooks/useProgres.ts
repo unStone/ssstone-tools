@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from'react';
-import { TOTP } from "totp-generator";
+import { useEffect, useRef, useState } from 'react';
+import { TOTP } from 'totp-generator';
 
 import { Values } from '../types'
 
@@ -7,39 +7,44 @@ const getPercent = (cycle: number) => {
   return (((new Date().getTime() / 1000) % cycle) / cycle) * 100;
 }
 
-const getDynamicCode = (data: Values) => {
+const getDynamicCode = async (data: Values) => {
   const { secretKey, cycle = 30, digit = 6, algorithm = 'SHA-1' } = data;
 
-  let otp = '';
   try {
-    otp = TOTP.generate(secretKey, {
+    const result = await TOTP.generate(secretKey, {
       digits: digit,
       algorithm,
       period: cycle,
-    }).otp
+    });
+
+    return result.otp;
   } catch (error: any) {
-    otp = '错误：' + error?.message;
+    return '错误：' + error?.message;
   }
-  return otp;
 }
 
 const useProgres = (data: Values) => {
   const { cycle = 30 } = data;
-  const [ dynamicCode, setDynamicCode ] = useState<string>('');
-  const [ percent, setPercent ] = useState<number>(100);
-  const timer = useRef<number>();
+  const [dynamicCode, setDynamicCode] = useState<string>('');
+  const [percent, setPercent] = useState<number>(100);
+  const timer = useRef<ReturnType<typeof setInterval>>();
 
   useEffect(() => {
-    timer.current = setInterval(() => {
+    const refreshCode = async () => {
       setPercent(getPercent(cycle));
-      setDynamicCode(getDynamicCode(data));
-    }, 300)
-  }, [])
+      setDynamicCode(await getDynamicCode(data));
+    };
 
-  useEffect(() => {
-    return () => clearInterval(timer.current);
-  }, [])
-  
+    refreshCode();
+    timer.current = setInterval(refreshCode, 300);
+
+    return () => {
+      if (timer.current) {
+        clearInterval(timer.current);
+      }
+    };
+  }, [cycle, data]);
+
   return { dynamicCode, percent }
 }
 

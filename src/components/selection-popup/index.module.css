@@ -1,0 +1,43 @@
+.popup {
+  position: fixed;
+  z-index: 9999;
+  min-width: 180px;
+  max-width: 320px;
+  background: #fff;
+  border: 1px solid #e6eaf2;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.18);
+  padding: 10px;
+}
+
+.text {
+  max-height: 70px;
+  overflow: auto;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #444;
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin-bottom: 8px;
+}
+
+.actions {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.button {
+  border: 0;
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #fff;
+  background: #1677ff;
+}
+
+.secondary {
+  background: #f3f4f6;
+  color: #555;
+}

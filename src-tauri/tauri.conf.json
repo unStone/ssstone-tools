@@ -14,12 +14,22 @@
       "icons/128x128@2x.png",
       "icons/icon.icns",
       "icons/icon.ico"
-    ]
+    ],
+    "createUpdaterArtifacts": true
   },
   "productName": "ssstonetools",
   "version": "0.2.0",
   "identifier": "ssstone",
-  "plugins": {},
+  "plugins": {
+    "updater": {
+      "active": true,
+      "dialog": false,
+      "endpoints": [
+        "https://releases.example.com/ssstone-tools/{{target}}/{{current_version}}"
+      ],
+      "pubkey": "REPLACE_WITH_TAURI_UPDATER_PUBKEY"
+    }
+  },
   "app": {
     "security": {
       "csp": null
