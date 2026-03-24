@@ -24,6 +24,7 @@ export default defineConfig(async () => ({
       'store': '/src/store/',
       'components': '/src/components/',
       'utils': '/src/utils/',
+      'constants': '/src/constants/',
     }
   }
 }));

@@ -21,6 +21,8 @@
     "shell:default",
     "clipboard-manager:allow-write-text",
     "clipboard-manager:allow-read-text",
-    "window:allow-start-dragging"
+    "window:allow-start-dragging",
+    "updater:default",
+    "process:allow-relaunch"
   ]
 }

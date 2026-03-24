@@ -1,28 +1,33 @@
-import { getCurrent } from '@tauri-apps/api/window';
+import { getCurrentWindow } from '@tauri-apps/api/window';
 
 import s from './index.module.css';
 
 const Operators = () => {
-
   const onClose = async () => {
-    await getCurrent()?.close()
+    await getCurrentWindow().close();
   }
 
   const onMin = async () => {
-    await getCurrent()?.minimize()
+    await getCurrentWindow().minimize();
   }
 
   const onMax = async () => {
-    const current = getCurrent();
-    await current.isMaximized()? await current.unmaximize() : await current.maximize()
-  }
+    const current = getCurrentWindow();
+    const maximized = await current.isMaximized();
 
+    if (maximized) {
+      await current.unmaximize();
+      return;
+    }
+
+    await current.maximize();
+  }
 
   return (
     <div className={s.operators} data-tauri-drag-region>
       <div className={s.iconBox}>
         <div className={`${s.icon} ${s.close}`} onClick={onClose} />
-      </div> 
+      </div>
       <div className={s.iconBox}>
         <div className={`${s.icon} ${s.min}`} onClick={onMin} />
       </div>
@@ -33,4 +38,4 @@ const Operators = () => {
   )
 }
 
-export default Operators
+export default Operators;

@@ -1,65 +1,78 @@
-
-import { useMemo } from 'react';
-import { Layout, Menu } from 'antd';
-import type { MenuProps } from 'antd';
-import { HomeOutlined } from '@ant-design/icons';
+import { useMemo, useState } from 'react';
+import { Layout, Input, Empty } from 'antd';
+import { HomeOutlined, SearchOutlined } from '@ant-design/icons';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { TOOL_MODULES } from 'constants/tools';
 import Operators from './operators';
 import s from './index.module.css'
 
 const { Sider } = Layout;
-type MenuItem = Required<MenuProps>['items'][number];
-
-function getItem(
-    label: React.ReactNode,
-    key: React.Key,
-    icon?: React.ReactNode,
-    children?: MenuItem[],
-    type?: 'group',
-  ): MenuItem {
-    return {
-      label,
-      key,
-      icon,
-      children,
-      type,
-    } as MenuItem;
-}
-
-const items: MenuProps['items'] = [
-    getItem('首页', 'home', <HomeOutlined />),
-    getItem('转换类', 'convert', null, [getItem('数字类型', 'number')]),
-    getItem('编码/转码类', 'code', null, [getItem('URL', 'url')]),
-    getItem('格式类', 'format', null, [getItem('JSON转换', 'json')]),
-    getItem('生成类', 'generate', null, [getItem('hash', 'hash'), getItem('GA', 'authenticator')]),
-];
 
 const SiderLayout = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const onClick: MenuProps['onClick'] = ({ keyPath }) => {
-    navigate([...keyPath].reverse().join('/'));
-  };
+  const [searchMap, setSearchMap] = useState<Record<string, string>>({});
 
-  const selectedKeys = useMemo(() => {
-    const keys = location.pathname.split('/').filter(Boolean);
-    return keys.length ? keys : ['home'];
+  const selectedPath = useMemo(() => {
+    const path = location.pathname.replace(/^\//, '');
+    return path || 'home';
   }, [location.pathname]);
 
+  const onSearch = (moduleKey: string, value: string) => {
+    setSearchMap((prev) => ({ ...prev, [moduleKey]: value }));
+  };
+
   return (
-    <Sider
-      className={s.siderBox}
-      data-tauri-drag-region
-    >
+    <Sider className={s.siderBox} data-tauri-drag-region>
       <Operators />
-      <Menu
-        onClick={onClick}
-        defaultOpenKeys={items.map((item) => item?.key as string)}
-        selectedKeys={selectedKeys}
-        style={{ width: 200 }}
-        mode="inline"
-        items={items}
-      />
+
+      <div className={s.homeEntry} onClick={() => navigate('/home')}>
+        <HomeOutlined />
+        <span>首页</span>
+      </div>
+
+      <div className={s.modules}>
+        {TOOL_MODULES.map((module) => {
+          const keyword = searchMap[module.key]?.trim().toLowerCase() || '';
+          const filteredTools = module.tools.filter((item) => item.label.toLowerCase().includes(keyword) || item.key.toLowerCase().includes(keyword));
+
+          return (
+            <section className={s.moduleCard} key={module.key}>
+              <div className={s.moduleTitle}>{module.title}</div>
+              <Input
+                allowClear
+                prefix={<SearchOutlined />}
+                placeholder={`搜索${module.title}`}
+                size="small"
+                className={s.moduleSearch}
+                value={searchMap[module.key] || ''}
+                onChange={(event) => onSearch(module.key, event.target.value)}
+              />
+
+              {filteredTools.length ? (
+                <div className={s.toolList}>
+                  {filteredTools.map((tool) => {
+                    const path = `${module.key}/${tool.key}`;
+                    const active = selectedPath === path;
+                    return (
+                      <button
+                        key={tool.key}
+                        type="button"
+                        className={`${s.toolButton} ${active ? s.active : ''}`}
+                        onClick={() => navigate(`/${path}`)}
+                      >
+                        {tool.label}
+                      </button>
+                    );
+                  })}
+                </div>
+              ) : (
+                <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="没有匹配工具" className={s.emptyBlock} />
+              )}
+            </section>
+          );
+        })}
+      </div>
     </Sider>
   )
 }
